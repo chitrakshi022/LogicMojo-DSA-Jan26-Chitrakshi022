@@ -1,0 +1,16 @@
+public static int max_consecutive(List<Integer> arr) {
+    // Write your code here
+        int count = 0, maxCount = 0;
+        for(int i=0;i<arr.size();i++)
+        {
+            if(arr.get(i) == 1)
+            {
+                count++;
+                maxCount = Math.max(count, maxCount);
+            }
+            else
+                count = 0;
+        }
+        return maxCount;
+
+    }
