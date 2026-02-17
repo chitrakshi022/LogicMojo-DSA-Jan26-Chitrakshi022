@@ -1,0 +1,83 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+class Result {
+
+    /*
+     * Complete the 'twoSum' function below.
+     *
+     * The function is expected to return an INTEGER_ARRAY.
+     * The function accepts following parameters:
+     *  1. INTEGER target
+     *  2. INTEGER n
+     *  3. INTEGER_ARRAY arr
+     */
+
+    public static List<Integer> twoSum(int target, int n, List<Integer> arr) {
+    // Write your code here
+        int i=0, j=n-1;
+        List<Integer> ans = new ArrayList<>();
+        //List<Integer> listName = Arrays.asList(new Integer[10]); 
+        
+        while(i<=j)
+        {
+            if(arr.get(i) + arr.get(j) == target)
+            {
+                // listName.add(i);
+                // listName.add(j);
+                
+                 ans.add(i+1);
+                ans.add(j+1);
+                
+                break;
+                
+            }
+            else if(arr.get(i) + arr.get(j) < target)
+            {
+                i++;
+            }
+            else if(arr.get(i) + arr.get(j) > target)
+            {
+                j--;
+            }
+        }
+        return ans;
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int targert = Integer.parseInt(bufferedReader.readLine().trim());
+
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+        List<Integer> arr = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
+            .map(Integer::parseInt)
+            .collect(toList());
+
+        List<Integer> result = Result.twoSum(targert, n, arr);
+
+        bufferedWriter.write(
+            result.stream()
+                .map(Object::toString)
+                .collect(joining(" "))
+            + "\n"
+        );
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
